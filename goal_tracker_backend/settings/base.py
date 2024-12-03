@@ -11,6 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Security settings
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+AUTH_USER_MODEL = 'users.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,6 +23,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'users',
+    'goals',
 ]
 
 MIDDLEWARE = [
@@ -37,6 +40,24 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'goal_tracker_backend.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'goal_tracker_backend.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
